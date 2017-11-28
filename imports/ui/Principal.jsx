@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
+import Map from './map/Map.jsx'
 
 // Principal component - represents Principal component
 class Principal extends Component {
@@ -14,6 +15,8 @@ class Principal extends Component {
                 title="Discover Tasty"
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
             />
+        <Map/>
+
       </div>
     );
   }

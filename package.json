@@ -5,10 +5,13 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "@mapbox/point-geometry": "^0.1.0",
     "babel-runtime": "^6.26.0",
+    "google-map-react": "^0.25.0",
     "material-ui": "^0.19.4",
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "react-dom": "^16.1.1",
+    "react-tooltip": "^3.4.0"
   }
 }
