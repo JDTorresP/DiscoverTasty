@@ -3,7 +3,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import BigCalendar from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-import 'react-big-calendar/lib/addons/dragAndDrop/styles.less';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 
 BigCalendar.momentLocalizer(moment);
@@ -37,12 +37,14 @@ class Dnd extends React.Component {
 
   render(){
     return (
-      <DragAndDropCalendar
-        selectable
-        events={this.state.events}
-        onEventDrop={this.moveEvent}
-        defaultView='week'
-      />
+        <div className="container">
+            <DragAndDropCalendar
+            selectable
+            events={this.state.events}
+            onEventDrop={this.moveEvent}
+            defaultView='week'
+            />
+        </div>
     )
   }
 }

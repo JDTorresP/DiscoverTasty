@@ -23,7 +23,7 @@ class RestaurantsList extends Component {
     render(){
         return(
         <div className="container">
-            <div className="container row">{this.props.restaurants ? this.renderRestaurants():"No restaurants yet lol"}</div>
+            <div className="row">{this.props.restaurants ? this.renderRestaurants():"No restaurants yet lol"}</div>
         </div>);
     }
 }
