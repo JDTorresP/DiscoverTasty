@@ -7,6 +7,8 @@ import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
 import AccountsUIWrapper from './Accounts/AccountsUIWrapper.jsx';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import "../api/foursquareAPI.js";
+import RestaurantList from "./RestaurantList.jsx";
 
 const styles = {
   headline: {
@@ -17,14 +19,20 @@ const styles = {
   },
 };
 
+
 // Principal component - represents Principal component
 class Principal extends Component {
     constructor(props) {
         super(props);
         this.state = {
           value: 'a',
+          currentLatitude : this.props.currentLatitude,
+          currentLongitude : this.props.currentLongitude,
+          nearRestaurants: this.props.nearRestaurants
         };
     }
+    
+
 
   handleChange = (value) => {
     this.setState({
@@ -33,6 +41,7 @@ class Principal extends Component {
   };
   
   render() {
+    //console.log(this.state);
     return (
       <div className="Principal"> 
         <AccountsUIWrapper />
@@ -42,10 +51,8 @@ class Principal extends Component {
         >
           <Tab label="Restaurants" value="a">
             <div>
-              <h2 style={styles.headline}>Controllable Tab A</h2>
-              <p>
-                Here's where a list of restaurants will show up.
-              </p>
+              <h2 className="text-center" style={styles.headline}>Near Restaurants</h2>
+              <RestaurantList restaurants = {this.props.nearRestaurants}/>
             </div>
           </Tab>
           <Tab label="Itineraries" value="b">
