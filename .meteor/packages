@@ -26,3 +26,4 @@ facebook-config-ui
 accounts-google
 google-config-ui
 http
+momentjs:moment

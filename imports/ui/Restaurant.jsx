@@ -65,7 +65,7 @@ class Restaurant extends Component {
                 <div className="address">Address: {this.props.restaurant.venue.location.address}</div>
                 <div className="latitud"> Lat: {this.props.restaurant.venue.location.lat}</div>
                 <div className="longitud">Lon: {this.props.restaurant.venue.location.lng}</div>
-                <div className="visitas"> Visitas: {this.props.restaurant.venue.stats.checkinsCount}</div>
+                <div className="visitas"> Check-in: {this.props.restaurant.venue.stats.checkinsCount}</div>
                 <div className="rating"> Rating: {this.props.restaurant.venue.rating}/10</div>
             </div>
         );
