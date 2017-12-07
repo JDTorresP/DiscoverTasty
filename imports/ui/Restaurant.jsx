@@ -5,12 +5,13 @@ class Restaurant extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.restaurant.id,   
-            name:this.props.restaurant.name,
-            address: this.props.restaurant.location.address,
-            lat: this.props.restaurant.location.lat,
-            lon: this.props.restaurant.location.lng,
-            visitas:this.props.restaurant.stats.checkinsCount
+            id: this.props.restaurant.venue.id,   
+            name:this.props.restaurant.venue.name,
+            address: this.props.restaurant.venue.location.address,
+            lat: this.props.restaurant.venue.location.lat,
+            lon: this.props.restaurant.venue.location.lng,
+            visitas: this.props.restaurant.venue.stats.checkinsCount,
+            rating: this.props.restaurant.venue.rating
         };
     }
 /*     refrescar() {
@@ -56,14 +57,16 @@ class Restaurant extends Component {
  */
 
     render() {
+        console.log(this.props.restaurant.venue.rating);
         return (
             <div className="col-md-3 my-1 text-center">
-                <div className="id">ID: {this.props.restaurant.id}</div>
-                <div className="name">Name: {this.props.restaurant.name}</div>
-                <div className="address">Address: {this.props.restaurant.location.address}</div>
-                <div className="latitud"> Lat: {this.props.restaurant.location.lat}</div>
-                <div className="longitud">Lon: {this.props.restaurant.location.lng}</div>
-                <div className="# de visitas"> Visits: {this.props.restaurant.stats.checkinsCount}</div>
+                <div className="id">ID: {this.props.restaurant.venue.id}</div>
+                <div className="name">Name: {this.props.restaurant.venue.name}</div>
+                <div className="address">Address: {this.props.restaurant.venue.location.address}</div>
+                <div className="latitud"> Lat: {this.props.restaurant.venue.location.lat}</div>
+                <div className="longitud">Lon: {this.props.restaurant.venue.location.lng}</div>
+                <div className="visitas"> Visitas: {this.props.restaurant.venue.stats.checkinsCount}</div>
+                <div className="rating"> Rating: {this.props.restaurant.venue.rating}/10</div>
             </div>
         );
     }

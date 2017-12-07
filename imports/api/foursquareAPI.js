@@ -36,14 +36,14 @@ if(Meteor.isServer)
                 client_id: foursquare_id,
                 client_secret: foursquare_secret,
                 v: 20170801,
-                query: "Restaurant",
+                query: "Restaurante",
                 limit: 30,
                 ll: '' + lat + ',' + lng,
             };
     
             try {
                 console.log(params);
-            result = HTTP.get('https://api.foursquare.com/v2/venues/search', {
+            result = HTTP.get('https://api.foursquare.com/v2/venues/explore', {
                 params: params,
                 timeout: 20000
             });
@@ -60,7 +60,8 @@ if(Meteor.isServer)
             radius: radius,
             });
             */
-            return result.data.response.venues;
+            //return result.data.response.groups.items; 
+            return result.data.response.groups[0].items;
         },
     });
 }

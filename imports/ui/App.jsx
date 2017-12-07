@@ -29,10 +29,12 @@ export default class App extends Component {
   initPosition(position) {
     Meteor.call('foursquare-search',position.coords.latitude, position.coords.longitude, (err, response)=>{
       if (err) throw err;
+      console.log(response);
       this.setState({currentLatitude:position.coords.latitude,
         currentLongitude:position.coords.longitude,
         nearRestaurants:  response});
     });  
+    console.log(this.state);
   }
 
   componentDidMount(){
