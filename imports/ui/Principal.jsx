@@ -8,6 +8,7 @@ import Avatar from 'material-ui/Avatar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import "../api/foursquareAPI.js";
 import RestaurantList from "./RestaurantList.jsx";
+import ItinerariesList from "./ItinerariesList.jsx";
 import DragDropContext from "./dnd.jsx";
 import Newss from './News.jsx';
 
@@ -70,7 +71,11 @@ class Principal extends Component {
           currentLongitude : this.props.currentLongitude,
           nearRestaurants: this.props.nearRestaurants,
           itineraries: [],
+<<<<<<< HEAD
           listRest:[]
+=======
+          events: []
+>>>>>>> d7674ca9f77e86df96d42ef2cb9764c5c0298e50
         };
         
     }
@@ -95,11 +100,12 @@ class Principal extends Component {
         >
           <Tab label="Itineraries" value="b">
             <div>
-              <h2 style={styles.headline}>Controllable Tab B</h2>
+              <h2 className="text-center" style={styles.headline}>Itineraries</h2>
               <p>
                 here's where a list of Itineraries will show up
               </p>
-              <DragDropContext events={this.state.itineraries}/>
+              <ItinerariesList itineraries={this.state.itineraries}/>
+              <DragDropContext events={this.state.events}/>
             </div>
           </Tab>
         </Tabs>

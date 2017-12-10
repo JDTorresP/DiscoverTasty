@@ -57,7 +57,10 @@ class Restaurant extends Component {
  */
 
     render() {
+<<<<<<< HEAD
         //console.log(this.props.restaurant.venue.rating);
+=======
+>>>>>>> d7674ca9f77e86df96d42ef2cb9764c5c0298e50
         return (
             <div className="col-md-3 my-1 text-center">
                 <div className="id">ID: {this.props.restaurant.venue.id}</div>
