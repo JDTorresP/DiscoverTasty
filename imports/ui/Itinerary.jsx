@@ -1,19 +1,16 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 
-class Restaurant extends Component {
+class Itinerary extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: this.props.restaurant.venue.id,   
-            name:this.props.restaurant.venue.name,
-            address: this.props.restaurant.venue.location.address,
-            lat: this.props.restaurant.venue.location.lat,
-            lon: this.props.restaurant.venue.location.lng,
-            visitas: this.props.restaurant.venue.stats.checkinsCount,
-            rating: this.props.restaurant.venue.rating
+        this.state = { 
+            name:this.props.name,
+            numEvents: 0,
+            events: []
         };
     }
+
 /*     refrescar() {
         this.setState({
             comments:this.props.restaurant.comments
@@ -59,13 +56,7 @@ class Restaurant extends Component {
     render() {
         return (
             <div className="col-md-3 my-1 text-center">
-                <div className="id">ID: {this.props.restaurant.venue.id}</div>
-                <div className="name">Name: {this.props.restaurant.venue.name}</div>
-                <div className="address">Address: {this.props.restaurant.venue.location.address}</div>
-                <div className="latitud"> Lat: {this.props.restaurant.venue.location.lat}</div>
-                <div className="longitud">Lon: {this.props.restaurant.venue.location.lng}</div>
-                <div className="visitas"> Check-in: {this.props.restaurant.venue.stats.checkinsCount}</div>
-                <div className="rating"> Rating: {this.props.restaurant.venue.rating}/10</div>
+                {this.props.name + "   number of restaurants to visit: " + this.state.numEvents}
             </div>
         );
     }
@@ -75,4 +66,4 @@ class Restaurant extends Component {
     restaurant: PropTypes.object.isRequired
 } */
 
-export default Restaurant;
+export default Itinerary;

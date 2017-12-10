@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-//import './css/bootstrap.css';
-//import './css/styles.css';
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import Restaurant from "./Restaurant.jsx";
 
 class RestaurantsList extends Component {
@@ -13,8 +11,6 @@ class RestaurantsList extends Component {
     }
 
     renderRestaurants(){
-        console.log("RENDERIZANDO RESTAURANTES");
-        console.log(this.state);
         return this.props.restaurants.map((t,i)=>{
             return <Restaurant restaurant={t} key={i}/>;
         });
@@ -27,8 +23,9 @@ class RestaurantsList extends Component {
         </div>);
     }
 }
-/* RestaurantsList.PropTypes = {
-    restaurants: PropTypes.array.isRequired
-} */
+
+RestaurantsList.propTypes = {
+    restaurants: propTypes.array.isRequired
+}
 
 export default RestaurantsList;

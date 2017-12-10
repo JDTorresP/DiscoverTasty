@@ -9,6 +9,7 @@ import AccountsUIWrapper from './Accounts/AccountsUIWrapper.jsx';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import "../api/foursquareAPI.js";
 import RestaurantList from "./RestaurantList.jsx";
+import ItinerariesList from "./ItinerariesList.jsx";
 import DragDropContext from "./dnd.jsx";
 
 const styles = {
@@ -30,7 +31,8 @@ class Principal extends Component {
           currentLatitude : this.props.currentLatitude,
           currentLongitude : this.props.currentLongitude,
           nearRestaurants: this.props.nearRestaurants,
-          itineraries: []
+          itineraries: [],
+          events: []
         };
     }
     
@@ -59,11 +61,12 @@ class Principal extends Component {
           </Tab>
           <Tab label="Itineraries" value="b">
             <div>
-              <h2 style={styles.headline}>Controllable Tab B</h2>
+              <h2 className="text-center" style={styles.headline}>Itineraries</h2>
               <p>
                 here's where a list of Itineraries will show up
               </p>
-              <DragDropContext events={this.state.itineraries}/>
+              <ItinerariesList itineraries={this.state.itineraries}/>
+              <DragDropContext events={this.state.events}/>
             </div>
           </Tab>
         </Tabs>
