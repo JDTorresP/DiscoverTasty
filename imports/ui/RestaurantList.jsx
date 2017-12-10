@@ -13,8 +13,8 @@ class RestaurantsList extends Component {
     }
 
     renderRestaurants(){
-        console.log("RENDERIZANDO RESTAURANTES");
-        console.log(this.state);
+       // console.log("RENDERIZANDO RESTAURANTES");
+       // console.log(this.state);
         return this.props.restaurants.map((t,i)=>{
             return <Restaurant restaurant={t} key={i}/>;
         });

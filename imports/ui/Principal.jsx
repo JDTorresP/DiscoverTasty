@@ -5,11 +5,11 @@ import Map from './map/Map.jsx'
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
-import AccountsUIWrapper from './Accounts/AccountsUIWrapper.jsx';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import "../api/foursquareAPI.js";
 import RestaurantList from "./RestaurantList.jsx";
 import DragDropContext from "./dnd.jsx";
+import Newss from './News.jsx';
 
 const styles = {
   headline: {
@@ -20,6 +20,45 @@ const styles = {
   },
 };
 
+//Temporarily store data here
+const PostsData = [
+  {
+    "category": "News",
+    "title": "CNN Acquire BEME",
+    "text": "CNN purchased Casey Neistat's Beme app for $25million.",
+    "image": "https://source.unsplash.com/user/erondu/600x400"
+  },
+  {
+    "category": "Travel",
+    "title": "Nomad Lifestyle",
+    "text": "Learn our tips and tricks on living a nomadic lifestyle",
+    "image": "https://source.unsplash.com/user/_vickyreyes/600x400"
+  },
+  {
+    "category": "Development",
+    "title": "React and the WP-API",
+    "text": "The first ever decoupled starter theme for React & the WP-API",
+    "image": "https://source.unsplash.com/user/ilyapavlov/600x400"
+  },
+  {
+    "category": "News",
+    "title": "CNN Acquire BEME",
+    "text": "CNN purchased Casey Neistat's Beme app for $25million.",
+    "image": "https://source.unsplash.com/user/erondu/600x400"
+  },
+  {
+    "category": "Travel",
+    "title": "Nomad Lifestyle",
+    "text": "Learn our tips and tricks on living a nomadic lifestyle",
+    "image": "https://source.unsplash.com/user/_vickyreyes/600x400"
+  },
+  {
+    "category": "Development",
+    "title": "React and the WP-API",
+    "text": "The first ever decoupled starter theme for React & the WP-API",
+    "image": "https://source.unsplash.com/user/ilyapavlov/600x400"
+  }
+]
 
 // Principal component - represents Principal component
 class Principal extends Component {
@@ -30,11 +69,11 @@ class Principal extends Component {
           currentLatitude : this.props.currentLatitude,
           currentLongitude : this.props.currentLongitude,
           nearRestaurants: this.props.nearRestaurants,
-          itineraries: []
+          itineraries: [],
+          listRest:[]
         };
+        
     }
-    
-
 
   handleChange = (value) => {
     this.setState({
@@ -45,18 +84,15 @@ class Principal extends Component {
   render() {
     //console.log(this.state);
     return (
-      <div className="Principal"> 
-        <AccountsUIWrapper />
+      <div className="Principal NewsRestaurant"> 
+      <div className = "NewsRestaurant">
+        <Newss nearRestaurants={this.props.nearRestaurants}/> 
+      </div>
+        
         <Tabs
           value={this.state.value}
           onChange={this.handleChange.bind(this)}
         >
-          <Tab label="Restaurants" value="a">
-            <div>
-              <h2 className="text-center" style={styles.headline}>Near Restaurants</h2>
-              <RestaurantList restaurants = {this.props.nearRestaurants}/>
-            </div>
-          </Tab>
           <Tab label="Itineraries" value="b">
             <div>
               <h2 style={styles.headline}>Controllable Tab B</h2>
@@ -67,15 +103,6 @@ class Principal extends Component {
             </div>
           </Tab>
         </Tabs>
-        <List>
-        <ListItem
-          disabled={true}
-          leftAvatar={
-          <Avatar src="../../client/img/b.png" />
-          }>
-          Image Avatar
-        </ListItem>
-        </List>
         <Map/>
       </div>
     );
