@@ -25,10 +25,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import "../api/itineraries.js";
 
-const items = [];
-for (let i = 0; i < 100; i++ ) {
-  items.push(<MenuItem value={i} key={i} primaryText={`Item ${i}`} />);
-}
 
 const styles = {
   headline: {
@@ -107,7 +103,15 @@ class Principal extends Component {
       
     
     showBack() {
+      let itit=[];
+      itit= this.props.itineraries;
+      const items = [];
+      for (let i = 0; i < itit.length; i++ ) {
+        items.push(<MenuItem value={i} key={i} primaryText={`Itineario ${i}`} />);
+      }
+
     this.setState({
+      itineraries:items,
       isFlipped: true
     });
    }
@@ -200,7 +204,7 @@ class Principal extends Component {
                       
                     </CardText>
                     <CardActions>
-                      <RaisedButton label="Make A Itinerary" primary={true} fullWidth={true} onClick={this.showBack} />
+                      <RaisedButton label="Save on a Itinerary" primary={true} fullWidth={true} onClick={this.showBack} />
                     </CardActions>
                   </Card>
 
@@ -214,10 +218,10 @@ class Principal extends Component {
                     <CardTitle title={tlt} subtitle="" />
                     <CardText>
                       {Meteor.user()?<div>
-                         <TextField
-                            hintText="Name The itinerary"
-                            onChange = {this.manageNameItinerary}
-                          />
+                        Please Select One Itinerary
+                         <DropDownMenu maxHeight={300} value={this.state.value} onChange={this.handleChange}>
+                          {this.state.itineraries}
+                        </DropDownMenu>
                         </div> :<div>You Have To Login First</div>}
                     </CardText>
                     <CardActions>
