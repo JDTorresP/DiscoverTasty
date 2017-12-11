@@ -1,3 +1,4 @@
+//Felipe Iregui: Es mejor practica separar los ocmponentes de react con los .tests uno en carpeta ui y los otros en carpeta api
 import { assert } from "meteor/practicalmeteor:chai";
 import { shallow } from 'enzyme';
 import React from "react";
