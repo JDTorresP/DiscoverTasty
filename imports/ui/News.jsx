@@ -34,7 +34,7 @@ class News extends Component {
           "lat":t.venue.location.lat,
           "lng":t.venue.location.lng,
           "url":t.venue.url,
-          "price":t.venue.price.message,
+          "price": t.venue.price ? t.venue.price.message : "No price" ,
           "rating":t.venue.rating,
           "tips":t.tips
           
