@@ -58,7 +58,7 @@ class Dnd extends React.Component {
         <div className="col-md-8">
             <DragAndDropCalendar
             selectable
-            events={this.state.events}
+            events={this.props.events}
             onEventDrop={this.moveEvent}
             defaultView='week'
             components={{
