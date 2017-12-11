@@ -10,6 +10,7 @@
     "bcrypt": "^1.0.3",
     "classnames": "^2.2.5",
     "google-map-react": "^0.25.0",
+    "indexof": "0.0.1",
     "material-ui": "^0.19.4",
     "meteor-node-stubs": "^0.3.2",
     "moment": "^2.19.3",
@@ -21,6 +22,7 @@
     "react-dom": "^16.2.0",
     "react-headroom": "^2.2.2",
     "react-md": "^1.2.8",
+    "react-sliding-pane": "^2.0.1",
     "react-tooltip": "^3.4.0",
     "searchkit": "^2.3.0",
     "utils": "^0.3.1"

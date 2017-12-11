@@ -21,8 +21,8 @@ class News extends Component {
         else{
           ruta = t.venue.photos.groups[0].items[0].prefix+'500x300'+t.venue.photos.groups[0].items[0].suffix;
         }
-       categ= (t.venue.location.city || t.venue.location.country)=='UNDEFINED' ? 'COLOMBIA':t.venue.location.city+','+t.venue.location.country;
-
+       categ= typeof (t.venue.location.city || t.venue.location.country)== 'undefined' ? 'COLOMBIA':t.venue.location.city+','+t.venue.location.country;
+        
        let p = {
           "category": categ,
           "title": t.venue.name,
