@@ -35,6 +35,24 @@ class Dnd extends React.Component {
     alert(`${event.title} was dropped onto ${event.start}`);
   }
 
+  Event({ event }) {
+    return (
+        <span>
+            <strong>
+                {event.title}
+            </strong>
+            { event.desc && (':  ' + event.desc)}
+        </span>
+        )
+    }
+
+    EventAgenda({ event }) {
+    return <span>
+        <em style={{ color: 'magenta'}}>{event.title}</em>
+        <p>{ event.desc }</p>
+    </span>
+    }
+
   render(){
     return (
         <div className="col-md-8">
@@ -43,6 +61,12 @@ class Dnd extends React.Component {
             events={this.state.events}
             onEventDrop={this.moveEvent}
             defaultView='week'
+            components={{
+                event: this.Event,
+                agenda: {
+                  event: this.EventAgenda
+                }
+              }}
             />
         </div>
     )
