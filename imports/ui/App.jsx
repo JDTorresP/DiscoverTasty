@@ -1,3 +1,4 @@
+// Felipe Iregui: Excelente manejo de componentes de react! muchos ocmponentes bien unidos.
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Principal from './Principal.jsx';
