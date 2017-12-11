@@ -2,10 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { HTTP } from 'meteor/http';
 
-// const f_id = process.env.FOURSQUARE_ID,
-//         f_sec= process.env.FOURSQUARE_SECRET;
-const f_id = 'WY1U2ZGODOKUWDY0R4KBQ1MVBJGGPQH5JJPMJUHWXUK2WQBU',
-        f_sec= '2IEFJX14KDWKKZ0YW4CFM02310YBYNLWCYDOVQUIDM3DNP5A';
+const f_id = process.env.FOURSQUARE_ID,
+        f_sec= process.env.FOURSQUARE_SECRET;
+
 
 if(Meteor.isServer)
 {
