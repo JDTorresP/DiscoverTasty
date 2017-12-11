@@ -20,6 +20,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import DatePicker from 'material-ui/DatePicker';
 import Toggle from 'material-ui/Toggle';
+import Snackbar from 'material-ui/Snackbar';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -106,6 +107,7 @@ class Principal extends Component {
       maxDate: maxDate,
       autoOk: false,
       disableYearSelection: false,
+      open : false
         };
         this.handleChangeSideModal = this.handleChangeSideModal.bind(this);
         this.changeIdSelected = this.changeIdSelected.bind(this);
@@ -115,6 +117,19 @@ class Principal extends Component {
         this.manageNameItinerary = this.manageNameItinerary.bind(this);
         this.makeItinerary= this.makeItinerary.bind(this);
     }
+
+    handleClickOpen = () => {
+    this.setState({
+      open: true,
+    });
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
       handleChangeMinDate = (event, date) => {
     this.setState({
       minDate: date,
@@ -135,6 +150,7 @@ class Principal extends Component {
 
     
     showBack() {
+      this.handleClickOpen();
       let itit=[];
       itit= this.props.itineraries;
       const items = [];
@@ -236,7 +252,14 @@ class Principal extends Component {
                       
                     </CardText>
                     <CardActions>
-                      <RaisedButton label="Save on a Itinerary" primary={true} fullWidth={true} onClick={this.showBack} />
+                      <RaisedButton label="Save on a Itinerary" primary={true} fullWidth={true}
+                       onClick={this.showBack} />
+                       <Snackbar
+                            open={this.state.open}
+                            message="Added to itinerary"
+                            autoHideDuration={4000}
+                            onRequestClose={this.handleRequestClose}
+                        />
                     </CardActions>
                   </Card>
 
