@@ -1,3 +1,4 @@
+//Felipe Iregui: Bien eliminados los paquetes insecure y autopublish! bien implementados los Meteor Methods
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
