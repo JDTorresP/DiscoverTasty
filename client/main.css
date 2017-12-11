@@ -2,8 +2,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 .Map {
-  height: 90vh;
-  width: 75%;
+  height: 90vh !important;
+  width: 100% !important;
   display: inline;
   float: left; }
   .Map .FloatingActionButton {

@@ -28,3 +28,4 @@ google-config-ui
 http
 momentjs:moment
 practicalmeteor:mocha
+react-meteor-data
