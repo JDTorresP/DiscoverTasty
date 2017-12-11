@@ -18,13 +18,18 @@ import { Meteor } from 'meteor/meteor';
 import TextField from 'material-ui/TextField';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import DatePicker from 'material-ui/DatePicker';
+import Toggle from 'material-ui/Toggle';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
 import "../api/itineraries.js";
-
+const optionsStyle = {
+  maxWidth: 255,
+  marginRight: 'auto',
+};
 
 const styles = {
   headline: {
@@ -79,6 +84,12 @@ const PostsData = [
 class Principal extends Component {
     constructor(props) {
         super(props);
+        const minDate = new Date();
+    const maxDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - 1);
+    minDate.setHours(0, 0, 0, 0);
+    maxDate.setFullYear(maxDate.getFullYear() + 1);
+    maxDate.setHours(0, 0, 0, 0);
         this.state = {
           value: 'a',
           currentLatitude : this.props.currentLatitude,
@@ -90,7 +101,11 @@ class Principal extends Component {
           isPaneOpenLeft: false,
           isFlipped: false,
           refresh:false,
-          value: 10
+          value: 10,
+          minDate: minDate,
+      maxDate: maxDate,
+      autoOk: false,
+      disableYearSelection: false,
         };
         this.handleChangeSideModal = this.handleChangeSideModal.bind(this);
         this.changeIdSelected = this.changeIdSelected.bind(this);
@@ -100,7 +115,24 @@ class Principal extends Component {
         this.manageNameItinerary = this.manageNameItinerary.bind(this);
         this.makeItinerary= this.makeItinerary.bind(this);
     }
-      
+      handleChangeMinDate = (event, date) => {
+    this.setState({
+      minDate: date,
+    });
+  };
+
+  handleChangeMaxDate = (event, date) => {
+    this.setState({
+      maxDate: date,
+    });
+  };
+
+  handleToggle = (event, toggled) => {
+    this.setState({
+      [event.target.name]: toggled,
+    });
+  };
+
     
     showBack() {
       let itit=[];
@@ -143,7 +175,7 @@ class Principal extends Component {
 
   makeItinerary(){
     console.log("empezo a agregar")
-     Meteor.call('itineraries.insert',this.state.nameIti, Meteor.userId() , (err, response)=>{
+     Meteor.call('itineraries.addEvent',itineraryId, fechaHora, nombreRestaurante, direccion, latitud, longitud, (err, response)=>{
       if (err) throw err;
      console.log(response);
       this.setState({
@@ -218,14 +250,51 @@ class Principal extends Component {
                     <CardTitle title={tlt} subtitle="" />
                     <CardText>
                       {Meteor.user()?<div>
-                        Please Select One Itinerary
+                         <DatePicker
+          floatingLabelText="Ranged Date Picker"
+          autoOk={this.state.autoOk}
+          minDate={this.state.minDate}
+          maxDate={this.state.maxDate}
+          disableYearSelection={this.state.disableYearSelection}
+        />
+        <div style={optionsStyle}>
+          <DatePicker
+            onChange={this.handleChangeMinDate}
+            autoOk={this.state.autoOk}
+            floatingLabelText="Min Date"
+            defaultDate={this.state.minDate}
+            disableYearSelection={this.state.disableYearSelection}
+          />
+          <DatePicker
+            onChange={this.handleChangeMaxDate}
+            autoOk={this.state.autoOk}
+            floatingLabelText="Max Date"
+            defaultDate={this.state.maxDate}
+            disableYearSelection={this.state.disableYearSelection}
+          />
+          <Toggle
+            name="autoOk"
+            value="autoOk"
+            label="Auto Ok"
+            toggled={this.state.autoOk}
+            onToggle={this.handleToggle}
+          />
+          <Toggle
+            name="disableYearSelection"
+            value="disableYearSelection"
+            label="Disable Year Selection"
+            toggled={this.state.disableYearSelection}
+            onToggle={this.handleToggle}
+          />
+        </div>
+                        Please Select One Itinerary <br/>
                          <DropDownMenu maxHeight={300} value={this.state.value} onChange={this.handleChange}>
                           {this.state.itineraries}
                         </DropDownMenu>
                         </div> :<div>You Have To Login First</div>}
                     </CardText>
                     <CardActions>
-                      {Meteor.user()?<div><RaisedButton label="Create" primary={true} fullWidth={true} onCLick={()=>{this.makeItinerary()}} /></div> :
+                      {Meteor.user()?<div><RaisedButton label="Create" primary={true} fullWidth={true} onCLick={this.makeItinerary} /></div> :
                       <div><RaisedButton label="LogIn" primary={true} fullWidth={true} onClick={ () => {this.setState({ isPaneOpenLeft: false });
                 this.showFront();}  } /></div>}
                       <RaisedButton label="Go Back" primary={true} fullWidth={true} onClick={this.showFront} />
@@ -246,6 +315,7 @@ class Principal extends Component {
 
           </Tab>
         </Tabs>
+        <Map/>
       </div>
     );
   }

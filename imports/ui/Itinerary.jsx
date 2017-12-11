@@ -54,9 +54,9 @@ class Itinerary extends Component {
 
     render() {
         return (
-            <div className="col-md-3 my-1 text-center">
+            <div>
                 {this.props.name + "   number of restaurants to visit: " + this.state.events.length}
-                <Map/>
+                <Map restaurants={this.state.events}/>
             </div>
         );
     }

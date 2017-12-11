@@ -16,7 +16,7 @@ class ItinerariesList extends Component {
 
     renderItineraries(){
         return this.props.itineraries.map((t,i)=>{
-        return (<div className="row"><Itinerary name={"Itinerario"+i} key={i}/></div>);
+        return (<div><Itinerary name={"Itinerario"+i} key={i}/></div>);
         });
     }
 
@@ -79,7 +79,7 @@ class ItinerariesList extends Component {
                     </div>
                 </form>
             </div>
-            <div className="itineraries">
+            <div>
                 {this.props.itineraries ? this.renderItineraries():"You have not created itineraries!"}
             </div>
         </div>);
