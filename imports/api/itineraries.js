@@ -55,8 +55,16 @@ Meteor.methods({
     check(nombreRestaurante, String);
     check(direccion, String)
  
-    newEvent = { restName: nombreRestaurante, date: fechaHora, address: direccion, lng: longitud, lat: latitud};
+    newEvent = { title: nombreRestaurante, start: fechaHora, desc: direccion, lng: longitud, lat: latitud};
 
     Itineraries.update(itineraryId, { $addToSet: { "events": newEvent } });
   },
+  
+  'itineraries.updateEvents'(itineraryId, events) {
+    check(events, Array);
+    check(itineraryId, String);
+
+    Itineraries.update(itineraryId, { $set: { "events": events } });
+  }
+
 });

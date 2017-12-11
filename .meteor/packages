@@ -27,4 +27,8 @@ accounts-google
 google-config-ui
 http
 momentjs:moment
+<<<<<<< HEAD
 react-meteor-data
+=======
+practicalmeteor:mocha
+>>>>>>> d4d15d467f18f3e5ab2626ed479b5d929bc94833
