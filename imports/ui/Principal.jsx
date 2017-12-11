@@ -16,6 +16,8 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 import ReactCardFlip from 'react-card-flip';
 import { Meteor } from 'meteor/meteor';
 import TextField from 'material-ui/TextField';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -23,6 +25,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import "../api/itineraries.js";
 
+const items = [];
+for (let i = 0; i < 100; i++ ) {
+  items.push(<MenuItem value={i} key={i} primaryText={`Item ${i}`} />);
+}
 
 const styles = {
   headline: {
@@ -87,7 +93,8 @@ class Principal extends Component {
           events: [],
           isPaneOpenLeft: false,
           isFlipped: false,
-          refresh:false
+          refresh:false,
+          value: 10
         };
         this.handleChangeSideModal = this.handleChangeSideModal.bind(this);
         this.changeIdSelected = this.changeIdSelected.bind(this);
