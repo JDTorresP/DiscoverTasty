@@ -4,6 +4,7 @@ import Itinerary from "./Itinerary.jsx";
 import { Meteor } from 'meteor/meteor';
 import "../api/itineraries.js";
 
+
 class ItinerariesList extends Component {
     constructor(props){
         super(props);
@@ -29,7 +30,7 @@ class ItinerariesList extends Component {
         console.log(name)
         if(!this.isEmpty(name) && !this.isBlank(name))
         {
-            Meteor.call('itineraries.insert', name, (err, response)=>{
+            Meteor.call('itineraries.insert', name, Meteor.userId(), (err, response)=>{
                 if (err) throw err;
               //  console.log(response);
                 console.log("insertó el itinerario");

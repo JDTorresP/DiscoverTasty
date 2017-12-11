@@ -5,8 +5,8 @@ import Headroom from 'react-headroom';
 import CitiesSlider from './CitiesSlider.jsx';
 import AccountsUIWrapper from './Accounts/AccountsUIWrapper.jsx';
 import AppBar from 'material-ui/AppBar';
-import SlidingPane from 'react-sliding-pane';
-import 'react-sliding-pane/dist/react-sliding-pane.css';
+import { withTracker } from 'meteor/react-meteor-data';
+
 
 import {
     SearchBox,
@@ -21,9 +21,10 @@ import {
     ResetFilters
     } from "searchkit";
 
-
+import { Itineraries } from '../api/itineraries.js';
 
 import "../api/foursquareAPI.js";
+import "../api/itineraries.js";
 
 
 const slides = [
@@ -64,7 +65,7 @@ const slides = [
 ];
 
 // App component - represents the whole app
-export default class App extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -73,14 +74,12 @@ export default class App extends Component {
       currentLatitude :0,
       currentLongitude : 0,
       nearRestaurants: [],
-      isPaneOpen: true,
-      isPaneOpenLeft: false
+      
     
     };
     this.getLocation = this.getLocation.bind(this);
     this.initPosition = this.initPosition.bind(this);
-    this.handleChangeSideModal = this.handleChangeSideModal.bind(this);
-
+    this.getCurrentItineraries = this.getCurrentItineraries.bind(this);
 }
   
   componentDidMount(){
@@ -97,6 +96,16 @@ export default class App extends Component {
         alert("Geolocation is not supported by this browser."); 
     }
   }
+  getCurrentItineraries(){
+    Meteor.subscribe('itineraries');
+    Meteor.call('itineraries.get', (err, response)=>{
+      if (err) throw err;
+    //  console.log(response);
+      this.setState({
+        currentItineraries:response
+      });
+    });  
+  }
 
   initPosition(position) {
     Meteor.call('foursquare-search',position.coords.latitude, position.coords.longitude, (err, response)=>{
@@ -108,9 +117,7 @@ export default class App extends Component {
     });  
     //console.log(this.state);
   }
-  handleChangeSideModal(){
-    this.setState({ isPaneOpenLeft: true }) 
-  }
+  
 
 
   render() {
@@ -130,18 +137,16 @@ export default class App extends Component {
          </MuiThemeProvider>
        </Headroom>
         <CitiesSlider slides={slides} />
-         <SlidingPane
-                isOpen={ this.state.isPaneOpenLeft }
-                title='Hey, it is optional pane title.  I can be React component too.'
-                from='left'
-                width='400px'
-                onRequestClose={ () => this.setState({ isPaneOpenLeft: false }) }>
-                <div>And I am pane content on left.</div>
-        </SlidingPane>
         <MuiThemeProvider>
-          <Principal currentLatitude={this.state.currentLatitude} currentLongitude={this.state.currentLongitude} nearRestaurants={this.state.nearRestaurants}/>
+          <Principal itineraries ={this.props.itineraries} currentLatitude={this.state.currentLatitude} currentLongitude={this.state.currentLongitude} nearRestaurants={this.state.nearRestaurants}/>
         </MuiThemeProvider>
       </div>
     );
   }
 }
+
+export default withTracker(() => {
+  return {
+    itineraries: Itineraries.find({}).fetch(),
+  };
+})(App);

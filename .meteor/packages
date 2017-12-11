@@ -27,3 +27,4 @@ accounts-google
 google-config-ui
 http
 momentjs:moment
+react-meteor-data

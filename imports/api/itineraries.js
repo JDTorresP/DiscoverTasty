@@ -3,29 +3,41 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
  
 export const Itineraries = new Mongo.Collection('itineraries');
- 
+
+if (Meteor.isServer) {
+  // This code only runs on the server
+  Meteor.publish('itineraries', function itiPublication() {
+    return Itineraries.find();
+  });
+}
+
 Meteor.methods({
-  'itineraries.insert'(name) {
+  'itineraries.invite'(itineraryId, un){
+    check(itineraryId, String);
+    check(un, String);
+
+    Users.find({username: un}) ? Itineraries.update(itineraryId, { $addToSet: { "invited": un } }) : console.log("The user does not exist");
+  },
+  'itineraries.getByUser'(un) {
+    return Itineraries.find( {$or: [{username : un}, {invited: un}]});
+  },
+  'itineraries.insert'(name ,id) {
     check(name, String);
     events = [];
-    // Make sure the user is logged in before inserting a task
-    /* if (! this.userId) {
-      throw new Meteor.Error('not-authorized');
-    } */
  
     Itineraries.insert({
       name,
       events,
       createdAt: new Date(),
-     // owner: this.userId,
-     // invited: usuarios invitados.
-     // username: Meteor.users.findOne(this.userId).username,
+      owner: id,
+      invited: [],
+      username: Meteor.users.findOne(id).username,
     });
     console.log( "insertado: " + name);
   },
 
   'itineraries.get'() {
-    return Itineraries.find({});
+    return Itineraries.find({}).fetch();
   },
 
   'itineraries.remove'(itineraryId) {

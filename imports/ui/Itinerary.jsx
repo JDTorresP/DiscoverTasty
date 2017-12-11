@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import Map from './map/Map.jsx'
 
 class Itinerary extends Component {
     constructor(props) {
@@ -55,7 +56,6 @@ class Itinerary extends Component {
         return (
             <div className="col-md-3 my-1 text-center">
                 {this.props.name + "   number of restaurants to visit: " + this.state.events.length}
-                <DragDropContext events={this.state.events}/>
                 <Map/>
             </div>
         );
