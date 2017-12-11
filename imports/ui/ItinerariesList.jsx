@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import propTypes from "prop-types";
 import Itinerary from "./Itinerary.jsx";
+import { Meteor } from 'meteor/meteor';
+import "../api/itineraries.js";
 
 class ItinerariesList extends Component {
     constructor(props){
@@ -12,8 +14,6 @@ class ItinerariesList extends Component {
     }
 
     renderItineraries(){
-        console.log("RENDERIZANDO ITINERARIOS");
-        console.log(this.state);
         return this.props.itineraries.map((t,i)=>{
         return (<div className="row"><Itinerary name={"Itinerario"+i} key={i}/></div>);
         });
@@ -26,29 +26,44 @@ class ItinerariesList extends Component {
     handleSubmit() {
         const name = this.state.name;
         //EVENTS DETERMINARÁ LOS EVENTOS DEL ITINERARIO, ES DECIR, LAS VISITAS A LOS RESTAURANTES
-        const events = [];
         console.log(name)
-
+        if(!this.isEmpty(name) && !this.isBlank(name))
+        {
+            Meteor.call('itineraries.insert', name, (err, response)=>{
+                if (err) throw err;
+              //  console.log(response);
+                console.log("insertó el itinerario");
+                console.log(response);
+              });
+        }
+        else{
+            alert("Please, enter a valid name!");
+        }
         //CALL DEL METEOR METHOD PARA CREAR UN ITINERARIO
-        console.log('entre funcion');
-        
+    }
+
+    isEmpty(str) {
+        return (!str || 0 === str.length);
+    }
+
+    isBlank(str) {
+        return (!str || /^\s*$/.test(str));
     }
 
     handleChange(newName){  
         this.setState({
             name:newName
         })
-        console.log(this.state.name)
     }
 
     render(){
         return(
         <div className="container">
-            <div className="card card-body py-2 px-2 mb-2">
+            <div className="card card-body px-2">
                 <form>
                     <div>
                         <label className="name">Itinerary's name:</label>
-                        <input type="email" className="form-control"
+                        <input className="form-control"
                             placeholder="Insert a name"
                             id="name" onChange={(e)=>{
                                 this.handleChange(e.target.value)
@@ -64,7 +79,7 @@ class ItinerariesList extends Component {
                 </form>
             </div>
             <div className="itineraries">
-                {this.state.itineraries ? this.renderItineraries():"You have not created itineraries!"}
+                {this.props.itineraries ? this.renderItineraries():"You have not created itineraries!"}
             </div>
         </div>);
     }

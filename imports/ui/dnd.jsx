@@ -37,7 +37,7 @@ class Dnd extends React.Component {
 
   render(){
     return (
-        <div className="container">
+        <div className="col-md-8">
             <DragAndDropCalendar
             selectable
             events={this.state.events}

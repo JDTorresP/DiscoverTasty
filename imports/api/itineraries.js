@@ -21,6 +21,11 @@ Meteor.methods({
      // invited: usuarios invitados.
      // username: Meteor.users.findOne(this.userId).username,
     });
+    console.log( "insertado: " + name);
+  },
+
+  'itineraries.get'() {
+    return Itineraries.find({});
   },
 
   'itineraries.remove'(itineraryId) {

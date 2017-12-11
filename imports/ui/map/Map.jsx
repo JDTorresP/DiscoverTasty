@@ -44,7 +44,7 @@ reGetLocalization(){
   render() {
     this.getLocation();
     return (
-      <div className="Map">
+      <div className="Map col-md-4">
           <GoogleMapReact
               options={{styles: [{
                 "featureType": "all",

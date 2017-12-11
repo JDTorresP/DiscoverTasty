@@ -90,23 +90,16 @@ class Principal extends Component {
       <div className = "NewsRestaurant">
         <Newss nearRestaurants={this.props.nearRestaurants}/> 
       </div>
-        
         <Tabs
           value={this.state.value}
           onChange={this.handleChange.bind(this)}
         >
-          <Tab label="Itineraries" value="b">
-            <div>
-              <h2 className="text-center" style={styles.headline}>Itineraries</h2>
-              <p>
-                here's where a list of Itineraries will show up
-              </p>
+          <Tab label="Itineraries" value="a">
+            <div className="pb-3">
               <ItinerariesList itineraries={this.state.itineraries}/>
-              <DragDropContext events={this.state.events}/>
             </div>
           </Tab>
         </Tabs>
-        <Map/>
       </div>
     );
   }

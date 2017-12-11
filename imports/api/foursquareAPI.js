@@ -10,8 +10,8 @@ if(Meteor.isServer)
         // return array of venues
         'foursquare-search'(lat, lng) {
     
-            var foursquare_id = "...",
-            foursquare_secret = "...";
+            var foursquare_id = process.env.FOURSQUARE_ID,
+            foursquare_secret = process.env.FOURSQUARE_SECRET;
     
             if (! foursquare_secret || ! foursquare_id) {
                 console.log('!! You should set both, FOURSQUARE_ID and FOURSQUARE_SECRET env variables');

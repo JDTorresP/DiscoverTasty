@@ -6,7 +6,6 @@ class Itinerary extends Component {
         super(props);
         this.state = { 
             name:this.props.name,
-            numEvents: 0,
             events: []
         };
     }
@@ -55,7 +54,9 @@ class Itinerary extends Component {
     render() {
         return (
             <div className="col-md-3 my-1 text-center">
-                {this.props.name + "   number of restaurants to visit: " + this.state.numEvents}
+                {this.props.name + "   number of restaurants to visit: " + this.state.events.length}
+                <DragDropContext events={this.state.events}/>
+                <Map/>
             </div>
         );
     }
