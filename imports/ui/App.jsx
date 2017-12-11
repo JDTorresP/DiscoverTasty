@@ -5,6 +5,8 @@ import Headroom from 'react-headroom';
 import CitiesSlider from './CitiesSlider.jsx';
 import AccountsUIWrapper from './Accounts/AccountsUIWrapper.jsx';
 import AppBar from 'material-ui/AppBar';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 import {
     SearchBox,
@@ -70,11 +72,14 @@ export default class App extends Component {
     this.state = {
       currentLatitude :0,
       currentLongitude : 0,
-      nearRestaurants: []
+      nearRestaurants: [],
+      isPaneOpen: true,
+      isPaneOpenLeft: false
     
     };
     this.getLocation = this.getLocation.bind(this);
     this.initPosition = this.initPosition.bind(this);
+    this.handleChangeSideModal = this.handleChangeSideModal.bind(this);
 
 }
   
@@ -103,6 +108,9 @@ export default class App extends Component {
     });  
     //console.log(this.state);
   }
+  handleChangeSideModal(){
+    this.setState({ isPaneOpenLeft: true }) 
+  }
 
 
   render() {
@@ -122,6 +130,14 @@ export default class App extends Component {
          </MuiThemeProvider>
        </Headroom>
         <CitiesSlider slides={slides} />
+         <SlidingPane
+                isOpen={ this.state.isPaneOpenLeft }
+                title='Hey, it is optional pane title.  I can be React component too.'
+                from='left'
+                width='400px'
+                onRequestClose={ () => this.setState({ isPaneOpenLeft: false }) }>
+                <div>And I am pane content on left.</div>
+        </SlidingPane>
         <MuiThemeProvider>
           <Principal currentLatitude={this.state.currentLatitude} currentLongitude={this.state.currentLongitude} nearRestaurants={this.state.nearRestaurants}/>
         </MuiThemeProvider>

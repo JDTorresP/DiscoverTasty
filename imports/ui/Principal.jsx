@@ -87,10 +87,8 @@ class Principal extends Component {
     //console.log(this.state);
     return (
       <div className="Principal NewsRestaurant"> 
-      <div className = "NewsRestaurant">
+      
         <Newss nearRestaurants={this.props.nearRestaurants}/> 
-      </div>
-        
         <Tabs
           value={this.state.value}
           onChange={this.handleChange.bind(this)}
