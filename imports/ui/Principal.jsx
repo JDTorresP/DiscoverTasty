@@ -317,6 +317,7 @@ class Principal extends Component {
                         </div> :<div>You Have To Login First</div>}
                     </CardText>
                     <CardActions>
+                      //Felipe Iregui: Siempre metan el Meteor.user() dentro de un iF completo, por experiencia propia asi puede fallar.
                       {Meteor.user()?<div><RaisedButton label="Create" primary={true} fullWidth={true} onCLick={this.makeItinerary} /></div> :
                       <div><RaisedButton label="LogIn" primary={true} fullWidth={true} onClick={ () => {this.setState({ isPaneOpenLeft: false });
                 this.showFront();}  } /></div>}
